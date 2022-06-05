@@ -4,9 +4,9 @@
 [submodule "shaarli"]
 	path = shaarli
 	url = git@github.com:pablomalo/vps__shaarli.git
-[submodule "wallabag"]
-	path = wallabag
-	url = git@github.com:pablomalo/vps__wallabag.git
 [submodule "whoami"]
 	path = whoami
 	url = git@github.com:pablomalo/vps__whoami.git
+[submodule "wallabag"]
+	path = wallabag
+	url = git@github.com:pablomalo/vps__wallabag.git
