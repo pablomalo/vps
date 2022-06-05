@@ -1,0 +1,36 @@
+version: '3'
+
+networks:
+  proxynet:
+    external: true
+
+services:
+  app:
+    image: traefik:v2.6
+    container_name: traefik
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - '80:80'
+      - '443:443'
+      - '8080:8080' # Dashboard
+    volumes:
+      # Let Traefik listen to Docker events
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      # Static configuration
+      - './traefik.yml:/etc/traefik/traefik.yml'
+      - './logs:/logs'
+      - './letsencrypt:/etc/traefik/letsencrypt'
+    networks:
+      - proxynet
+    labels:
+       - 'traefik.enable=true'
+       - 'traefik.http.routers.traefik-ui.rule=Host(`${TRAEFIK_UI_HOSTNAME}`)'
+       - 'traefik.http.routers.traefik-ui.entryPoints=websecure'
+       - 'traefik.http.routers.traefik-ui.tls.certResolver=letsEncrypt'
+       # Expose a service
+       - 'traefik.http.routers.traefik-ui.service=api@internal'
+       # Basic auth
+       - 'traefik.http.routers.traefik-ui.middlewares=frontend-auth'
+       - 'traefik.http.middlewares.frontend-auth.basicauth.users=${BASIC_AUTH_USERNAME}:${BASIC_AUTH_PASSWORD_HASH}'
+
