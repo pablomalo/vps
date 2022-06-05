@@ -2,7 +2,7 @@
 
 This repo provides a basis for my VPS setup, with a variety of SSL-secured services routed through a Traefik reverse proxy.
  
-# Setup
+# Installation
 
 1. Clone this repo and cd into it.
 
