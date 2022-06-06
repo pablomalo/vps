@@ -10,3 +10,6 @@
 [submodule "wallabag"]
 	path = wallabag
 	url = git@github.com:pablomalo/vps__wallabag.git
+[submodule "heimdall"]
+	path = heimdall
+	url = git@github.com:pablomalo/vps__heimdall.git
